@@ -14,6 +14,8 @@ public interface IAction
     /// </summary>
     void EndAct();
 
+    string GetActionName();
+
     public static IAction BuildAction(ActionType type)
     {
         IAction a;

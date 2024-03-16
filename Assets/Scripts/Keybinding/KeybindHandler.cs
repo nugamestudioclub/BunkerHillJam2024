@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -129,6 +130,12 @@ public class KeybindHandler : MonoBehaviour
         else
         {
             instance.AppendKeybind(action);
+        }
+
+        foreach(KeySequence ks in instance.actionMap.Keys)
+        {
+            string name = instance.actionMap[ks].GetActionName();
+            UIActionDisplay.UpdateAction(name, ks.Codes);
         }
         
     }

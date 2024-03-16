@@ -22,4 +22,9 @@ public class JumpAction : MonoBehaviour, IAction
     {
         // pass
     }
+
+    public string GetActionName()
+    {
+        return "Jump";
+    }
 }

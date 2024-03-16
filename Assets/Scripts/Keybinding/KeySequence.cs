@@ -48,7 +48,7 @@ public class KeySequence
     {
         foreach(KeyCode code in this.codes)
         {
-            if (lambda(code))
+            if (!lambda(code))
             {
                 return true;
             }
