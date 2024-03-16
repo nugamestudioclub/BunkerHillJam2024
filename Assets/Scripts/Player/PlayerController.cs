@@ -62,6 +62,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public static bool IsGrounded()
+    {
+        return controller.player.isGrounded;
+    }
+
     public static void Jump()
     {
         controller.vel.y = NORMAL_JUMP_HEIGHT;

@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class JumpAction : MonoBehaviour, IAction
 {
-    private CharacterController c;
+    private PlayerController player;
 
     void Start()
     {
-        this.c = GetComponent<CharacterController>();
+        player = GetComponent<PlayerController>();
     }
     public void Act()
     {
-        if (this.c.isGrounded)
+        if (PlayerController.IsGrounded())
         {
-            // jump
+            PlayerController.Jump();
         }
     }
 
