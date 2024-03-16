@@ -1,0 +1,89 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f1a685063609294ba61c1fdfaa878d3, type: 3}
+  m_Name: KeyMapping
+  m_EditorClassIdentifier: 
+  m_KeyMap:
+  - KeyCode: 113
+    position: {x: 0, y: 0}
+  - KeyCode: 119
+    position: {x: 1, y: 0}
+  - KeyCode: 101
+    position: {x: 2, y: 0}
+  - KeyCode: 114
+    position: {x: 3, y: 0}
+  - KeyCode: 116
+    position: {x: 4, y: 0}
+  - KeyCode: 121
+    position: {x: 5, y: 0}
+  - KeyCode: 117
+    position: {x: 5, y: 0}
+  - KeyCode: 105
+    position: {x: 6, y: 0}
+  - KeyCode: 111
+    position: {x: 7, y: 0}
+  - KeyCode: 112
+    position: {x: 8, y: 0}
+  - KeyCode: 97
+    position: {x: 0, y: 1}
+  - KeyCode: 115
+    position: {x: 1, y: 1}
+  - KeyCode: 100
+    position: {x: 3, y: 1}
+  - KeyCode: 102
+    position: {x: 4, y: 1}
+  - KeyCode: 103
+    position: {x: 5, y: 1}
+  - KeyCode: 104
+    position: {x: 6, y: 1}
+  - KeyCode: 106
+    position: {x: 7, y: 1}
+  - KeyCode: 107
+    position: {x: 8, y: 1}
+  - KeyCode: 108
+    position: {x: 9, y: 1}
+  - KeyCode: 122
+    position: {x: 0, y: 2}
+  - KeyCode: 120
+    position: {x: 1, y: 2}
+  - KeyCode: 99
+    position: {x: 2, y: 2}
+  - KeyCode: 118
+    position: {x: 3, y: 2}
+  - KeyCode: 98
+    position: {x: 4, y: 2}
+  - KeyCode: 110
+    position: {x: 5, y: 2}
+  - KeyCode: 109
+    position: {x: 6, y: 2}
+  - KeyCode: 257
+    position: {x: 0, y: -1}
+  - KeyCode: 258
+    position: {x: 1, y: -1}
+  - KeyCode: 259
+    position: {x: 2, y: -1}
+  - KeyCode: 260
+    position: {x: 3, y: -1}
+  - KeyCode: 261
+    position: {x: 4, y: -1}
+  - KeyCode: 262
+    position: {x: 5, y: -1}
+  - KeyCode: 263
+    position: {x: 6, y: -1}
+  - KeyCode: 264
+    position: {x: 7, y: -1}
+  - KeyCode: 265
+    position: {x: 8, y: -1}
+  - KeyCode: 256
+    position: {x: 9, y: -1}
+  - KeyCode: 32
+    position: {x: 5, y: 3}
