@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 
 public class KeySequence
 {
-
+    private List<float> timeSincePress;
     private List<KeyCode> codes;
     public List<KeyCode> Codes
     {
@@ -15,23 +16,32 @@ public class KeySequence
     public KeySequence(KeyCode initCode)
     {
         this.codes = new List<KeyCode>() { initCode };
+        timeSincePress = new List<float>() {0f};
     }
 
     public bool IsPressed(System.Func<KeyCode,bool> downLambda, System.Func<KeyCode,bool> heldLambda)
     {
-        bool isPressed = false;
-        // Check if one is pressed down.
-        foreach(KeyCode keyCode in codes)
+        bool atLeastOneKeyDown = false; // To check if at least one key is pressed down.
+        bool allKeysHeld = true; // Start with true, and check if any key does not meet the criteria.
+
+        int index = 0;
+        foreach (KeyCode keyCode in codes)
         {
-            isPressed = isPressed||downLambda(keyCode);
+            bool down = downLambda(keyCode);
+            if (down)
+            {
+                atLeastOneKeyDown = true; // At least one key is pressed down.
+                timeSincePress[index] = Time.time; // Update the press time for this key.
+            }
+            else if (!(heldLambda(keyCode) || (Time.time - timeSincePress[index]) < 0.5f))
+            {
+                allKeysHeld = false; // If any key is not held down and not within the time limit, set to false.
+            }
+            index++;
         }
 
-        //Check if all are pressed.
-        foreach(KeyCode code in this.codes)
-        {
-            isPressed = isPressed && heldLambda(code);
-        }
-        return isPressed;
+        // Return true if at least one key is pressed down and all keys are held down or were pressed recently.
+        return atLeastOneKeyDown && allKeysHeld;
     }
 
     public bool IsReleased(System.Func<KeyCode,bool> lambda)
@@ -52,6 +62,9 @@ public class KeySequence
     /// </summary>
     public void AddRandom()
     {
-        codes.Add(KeybindHandler.ChooseRandom(codes[0], codes));
+        KeyCode rand = KeybindHandler.ChooseRandom(codes[0], codes);
+        codes.Add(rand);
+        timeSincePress.Add(0);
+        Debug.Log("Added keycode:" + rand);
     }
 }

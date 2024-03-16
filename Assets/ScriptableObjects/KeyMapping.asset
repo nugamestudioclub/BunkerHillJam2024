@@ -65,25 +65,25 @@ MonoBehaviour:
     position: {x: 5, y: 2}
   - KeyCode: 109
     position: {x: 6, y: 2}
-  - KeyCode: 257
+  - KeyCode: 49
     position: {x: 0, y: -1}
-  - KeyCode: 258
+  - KeyCode: 50
     position: {x: 1, y: -1}
-  - KeyCode: 259
+  - KeyCode: 51
     position: {x: 2, y: -1}
-  - KeyCode: 260
+  - KeyCode: 52
     position: {x: 3, y: -1}
-  - KeyCode: 261
+  - KeyCode: 53
     position: {x: 4, y: -1}
-  - KeyCode: 262
+  - KeyCode: 54
     position: {x: 5, y: -1}
-  - KeyCode: 263
+  - KeyCode: 55
     position: {x: 6, y: -1}
-  - KeyCode: 264
+  - KeyCode: 56
     position: {x: 7, y: -1}
-  - KeyCode: 265
+  - KeyCode: 57
     position: {x: 8, y: -1}
-  - KeyCode: 256
+  - KeyCode: 48
     position: {x: 9, y: -1}
   - KeyCode: 32
     position: {x: 5, y: 3}

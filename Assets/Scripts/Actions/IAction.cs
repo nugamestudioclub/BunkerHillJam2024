@@ -4,6 +4,7 @@ using UnityEngine;
 
 public interface IAction
 {
+    public enum ActionType { Jump, Crouch, AirJump, DashHorizontal, FireFlower, Heal }
     /// <summary>
     /// Perform the action.
     /// </summary>
@@ -12,4 +13,42 @@ public interface IAction
     /// Complete the performed action.
     /// </summary>
     void EndAct();
+
+    public static IAction BuildAction(ActionType type)
+    {
+        IAction a;
+        GameObject player = PlayerController.Instance.gameObject;
+        switch (type)
+        {
+            case ActionType.Jump:
+                {
+                    a = player.GetComponent<JumpAction>();
+                    if (a == null)
+                    {
+                        a = player.AddComponent<JumpAction>();
+                        
+                    }
+                    break;
+                }
+            case ActionType.Crouch:
+                {
+                    a = player.GetComponent<CrouchAction>();
+                    if (a == null)
+                    {
+                        a = player.AddComponent<CrouchAction>();
+                        
+                    }
+                    break;
+                }
+            case ActionType.AirJump:
+            case ActionType.DashHorizontal:
+            case ActionType.FireFlower:
+            case ActionType.Heal:
+            default:
+                a = null;
+                return a;
+                
+        }
+        return a;
+    }
 }
