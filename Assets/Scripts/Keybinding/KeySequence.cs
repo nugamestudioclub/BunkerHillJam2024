@@ -7,6 +7,10 @@ public class KeySequence
 {
 
     private List<KeyCode> codes;
+    public List<KeyCode> Codes
+    {
+        get { return this.codes; }
+    }
 
     public KeySequence(KeyCode initCode)
     {
@@ -28,6 +32,6 @@ public class KeySequence
     /// </summary>
     public void AddRandom()
     {
-        
+        codes.Add(KeybindHandler.ChooseRandom(codes[0], codes));
     }
 }
