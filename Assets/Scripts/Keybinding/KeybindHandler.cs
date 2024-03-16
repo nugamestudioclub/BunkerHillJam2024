@@ -6,6 +6,7 @@ using UnityEngine;
 public class KeybindHandler : MonoBehaviour
 {
     private Dictionary<KeySequence, IAction> actionMap = new Dictionary<KeySequence, IAction>();
+
     [SerializeField]
     private KeyMapping mapping;
     public static KeyMapping Mapping;
@@ -14,7 +15,7 @@ public class KeybindHandler : MonoBehaviour
     {
         foreach(KeySequence key in actionMap.Keys)
         {
-            if (key.IsPressed(Input.GetKeyDown))
+            if (key.IsPressed(Input.GetKeyDown,Input.GetKey))
             {
                 actionMap[key].Act();
             }
@@ -24,7 +25,7 @@ public class KeybindHandler : MonoBehaviour
     {
         foreach(KeySequence key in actionMap.Keys)
         {
-            if (key.IsPressed(Input.GetKeyUp))
+            if (key.IsReleased(Input.GetKey))
             {
                 actionMap[key].EndAct();
             }

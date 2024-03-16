@@ -17,15 +17,35 @@ public class KeySequence
         this.codes = new List<KeyCode>() { initCode };
     }
 
-    public bool IsPressed(System.Func<KeyCode,bool> lambda)
+    public bool IsPressed(System.Func<KeyCode,bool> downLambda, System.Func<KeyCode,bool> heldLambda)
     {
-        bool isPressed = true;
+        bool isPressed = false;
+        // Check if one is pressed down.
+        foreach(KeyCode keyCode in codes)
+        {
+            isPressed = isPressed||downLambda(keyCode);
+        }
+
+        //Check if all are pressed.
         foreach(KeyCode code in this.codes)
         {
-            isPressed = isPressed && lambda(code);
+            isPressed = isPressed && heldLambda(code);
+        }
+        return isPressed;
+    }
+
+    public bool IsReleased(System.Func<KeyCode,bool> lambda)
+    {
+        foreach(KeyCode code in this.codes)
+        {
+            if (lambda(code))
+            {
+                return true;
+            }
         }
         return false;
     }
+    
 
     /// <summary>
     /// Adds a random key based on keyboard region.
