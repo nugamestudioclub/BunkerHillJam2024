@@ -16,7 +16,9 @@ public class CrouchAction : MonoBehaviour, IAction
         {
             isCrouching = true;
             originalHitboxSize = player.transform.localScale;
-            player.transform.localScale = player.transform.localScale + Vector3.down * 0.5f;
+            player.transform.localScale = player.transform.localScale + Vector3.down * 0.25f;
+            player.GetComponent<CharacterController>().height /= 2;
+            player.GetComponent<CharacterController>().radius /= 2;
         }
     }
 
@@ -26,7 +28,13 @@ public class CrouchAction : MonoBehaviour, IAction
         {
             isCrouching = false;
             player.transform.localScale = originalHitboxSize;
+            player.GetComponent<CharacterController>().height *= 2f;
+            player.GetComponent<CharacterController>().radius *= 2f;
         }
+    }
+    public string GetActionName()
+    {
+        return "Crouch";
     }
 
     void Start()
