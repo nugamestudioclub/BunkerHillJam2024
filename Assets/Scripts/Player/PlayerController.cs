@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private static PlayerController controller;
+    public static PlayerController Instance { get { return controller; } }
     private CharacterController player;
 
     [SerializeField]

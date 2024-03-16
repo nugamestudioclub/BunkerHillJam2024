@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 
@@ -52,6 +53,8 @@ public class KeySequence
     /// </summary>
     public void AddRandom()
     {
-        codes.Add(KeybindHandler.ChooseRandom(codes[0], codes));
+        KeyCode rand = KeybindHandler.ChooseRandom(codes[0], codes);
+        codes.Add(rand);
+        Debug.Log("Added keycode:" + rand);
     }
 }
