@@ -12,6 +12,7 @@ public class KeyMapping : ScriptableObject
         {
             if (mapping==null)
             {
+                mapping = new Dictionary<KeyCode,Vector2>();
                 foreach(KeyMap k in m_KeyMap)
                 {
                     mapping.Add(k.KeyCode, k.position);

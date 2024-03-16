@@ -31,26 +31,32 @@ public class KeybindHandler : MonoBehaviour
         }
     }
 
-    public static KeyCode ChooseRandom(KeyCode k)
+    private static int ManhattanDistance(Vector2 v1, Vector2 v2)
+    {
+        return Mathf.RoundToInt(Mathf.Abs(v2.y - v1.y) + Mathf.Abs(v2.x - v1.x));
+    }
+
+    public static List<KeyCode> EmptyKeyCodes = new List<KeyCode>();
+    public static KeyCode ChooseRandom(KeyCode k, List<KeyCode> excluded)
     {
         List<KeyCode> keys = new List<KeyCode>();
         List<float> distances = new List<float>();
         List<float> weights = new List<float>();
         List<System.Tuple<float, float>> ranges = new List<System.Tuple<float, float>>();
-        
         foreach(KeyCode key in Mapping.Mapping.Keys)
         {
-            if (key != k)
+            if (key != k && !excluded.Contains(key))
             {
                 keys.Add(key);
-                float dist = Vector2.Distance(Mapping.Mapping[k], Mapping.Mapping[key]);
+                int dist = ManhattanDistance(Mapping.Mapping[k], Mapping.Mapping[key]);
+                //float dist = Vector2.Distance(Mapping.Mapping[k], Mapping.Mapping[key]);
                 distances.Add(dist);
             }
         }
         float maxDist = distances.Max();
         foreach(float dist in distances)
         {
-            weights.Add(Mathf.Pow((maxDist - dist) + 1, 2));
+            weights.Add(Mathf.Pow((maxDist - dist) + 1, 10));
         }
         float maxRange = 0;
         foreach(float weight in weights)
