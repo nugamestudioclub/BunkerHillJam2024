@@ -47,7 +47,7 @@ public class UIActionComponent : MonoBehaviour
 
     private string CleanName(string raw)
     {
-        return raw.Replace("Alpha ", "");
+        return raw.Replace("Alpha", "");
     }
 
     public void ModifyKeyCodes(List<KeyCode> keys)
