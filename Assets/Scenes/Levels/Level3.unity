@@ -711,7 +711,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 868b447ed30fb384eadcc7da1947715f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextLevel: Level2
+  nextLevel: Level4
 --- !u!4 &113063076
 Transform:
   m_ObjectHideFlags: 0
@@ -4310,7 +4310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 068f6f40be6f3b847be9a8cadbeddd4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_sceneName: Level2
+  m_sceneName: Level3
 --- !u!224 &851708399
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4516,7 +4516,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 906362386}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d45c4c000ed8fe46bbca442961013cb, type: 3}
   m_Name: 
