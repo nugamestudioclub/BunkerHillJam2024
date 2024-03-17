@@ -11,13 +11,13 @@ public class DamageComponent : MonoBehaviour
     private int m_prevColliderUID;
     private HealthComponent m_cachedComponent;
 
-    private void OnTriggerEnter(Collider other)
+    public void OnTriggerEnter(Collider collision)
     {
-        int id = other.gameObject.GetInstanceID();
+        int id = collision.gameObject.GetInstanceID();
 
         HealthComponent component = (id == m_prevColliderUID) ? m_cachedComponent : null;
 
-        if (component || other.gameObject.TryGetComponent<HealthComponent>(out component))
+        if (component || collision.gameObject.TryGetComponent<HealthComponent>(out component))
         {
             DealDamageTo(component);
 
