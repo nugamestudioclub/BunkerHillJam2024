@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     private CharacterController player;
 
     [SerializeField]
-    private static float GRAVITY = 0.2f;
+    private static float GRAVITY = 0.15f;
     [SerializeField]
     private static float NORMAL_JUMP_HEIGHT = 0.04f;
     [SerializeField]
@@ -23,15 +23,18 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private LayerMask l;
 
-    private Vector2 vel = Vector2.zero;
+    Vector3 originalHitboxSize;
 
-    private bool groundedPrevFrame = false;
+    private Vector2 vel = Vector2.zero;
+    private bool facingRight = true;
+    private bool isCrouching = false;
 
     // Start is called before the first frame update
     void Start()
     {
         controller = this;
         player = GetComponent<CharacterController>();
+        originalHitboxSize = player.transform.localScale;
     }
 
     // Update is called once per frame
@@ -44,11 +47,6 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateController()
     {
-        if (!player.isGrounded && groundedPrevFrame)
-        {
-            groundedPrevFrame = false;
-        }
-
         LateralMovement();
         vel.x = Mathf.Lerp(vel.x, 0, Time.deltaTime * FRICTION);
 
@@ -56,7 +54,6 @@ public class PlayerController : MonoBehaviour
 
         if (player.isGrounded)
         {
-            groundedPrevFrame = true;
             //player.Move(new Vector3(0, -2, 0));
             vel.y = 0;
 
@@ -89,10 +86,12 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.RightArrow))
         {
             vel.x += NORMAL_MOVE_SPEED * Time.deltaTime;
+            facingRight = true;
         }
         else if (Input.GetKey(KeyCode.LeftArrow))
         {
             vel.x -= NORMAL_MOVE_SPEED * Time.deltaTime;
+            facingRight = false;
         }
     }
 
@@ -115,7 +114,7 @@ public class PlayerController : MonoBehaviour
     public static void Jump()
     {
         Debug.Log("jumping now!");
-        controller.vel.y = NORMAL_JUMP_HEIGHT;
+        controller.vel.y = PlayerController.IsCrouching() ? NORMAL_JUMP_HEIGHT * 0.75f : NORMAL_JUMP_HEIGHT;
         controller.player.Move(Vector3.up * controller.vel.y);
     }
 
@@ -127,6 +126,57 @@ public class PlayerController : MonoBehaviour
         proj.transform.position = this.transform.position + (Vector3.right * lastDir / Mathf.Abs(lastDir));
         proj.GetComponent<Projectile>().SetDirection(lastDir/Mathf.Abs(lastDir));
     }
+
+    // private
+    private void _Crouch()
+    {
+        isCrouching = true;
+        player.transform.localScale = player.transform.localScale + Vector3.down * 0.25f;
+        player.GetComponent<CharacterController>().height /= 2;
+        player.GetComponent<CharacterController>().radius /= 2;
+    }
+
+    // private
+    private void _Uncrouch()
+    {
+        isCrouching = false;
+        player.transform.localScale = originalHitboxSize;
+        player.GetComponent<CharacterController>().height *= 2f;
+        player.GetComponent<CharacterController>().radius *= 2f;
+    }
+
+    // private
+    private void _Dash()
+    {
+        if (facingRight)
+        {
+            vel.x = NORMAL_MOVE_SPEED;
+        }
+        else
+        {
+            vel.x = -NORMAL_MOVE_SPEED;
+        }
+    }
+    public static void Crouch()
+    {
+        controller._Crouch();
+    }
+
+    public static void Uncrouch()
+    {
+        controller._Uncrouch();
+    }
+
+    public static bool IsCrouching()
+    {
+        return controller.isCrouching;
+    }
+
+    public static void Dash()
+    {
+        controller._Dash();
+    }
+
     public static void Shoot()
     {
         controller._Shoot();

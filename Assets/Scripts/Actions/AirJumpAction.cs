@@ -9,8 +9,6 @@ public class AirJumpAction : MonoBehaviour, IAction
 
     public void Act()
     {
-        Debug.Log(canAirJump);
-        Debug.Log("on air: " + !PlayerController.IsGrounded());
         if (canAirJump && !PlayerController.IsGrounded())
         {
             PlayerController.Jump();

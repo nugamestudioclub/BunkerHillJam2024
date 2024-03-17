@@ -53,7 +53,12 @@ public interface IAction
                     break;
                 }
             case ActionType.DashHorizontal:
-                a = null;
+                a = player.GetComponent<AirDashAction>();
+                if (a == null)
+                {
+                    a = player.AddComponent<AirDashAction>();
+
+                }
                 break;
             case ActionType.FireFlower:
                 {
