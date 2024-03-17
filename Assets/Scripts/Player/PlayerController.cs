@@ -100,7 +100,16 @@ public class PlayerController : MonoBehaviour
     {
         controller.player.TryGetComponent<CharacterController>(out var c);
         //Debug.Log(Physics.Raycast(controller.player.transform.position, Vector2.down).collider);
-        return Physics.Raycast(controller.player.transform.position, Vector2.down, c.height / 2 + 0.1f, controller.l);
+        RaycastHit hit;
+        Ray r = new Ray();
+        r.origin = controller.player.transform.position;
+        r.direction = Vector2.down;
+        if(Physics.Raycast(r,out hit, c.height / 2 + 0.1f, controller.l))
+        {
+            print(hit.point + "," + hit.transform.name);
+            return true;
+        }
+        return false;
     }
 
     public static void Jump()

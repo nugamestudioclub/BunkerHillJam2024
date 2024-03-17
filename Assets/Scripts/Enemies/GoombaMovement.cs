@@ -28,6 +28,7 @@ public class GoombaMovement : MonoBehaviour
         }
 
     }
+    
     private void FixedUpdate()
     {
         rb.velocity = direction * speed;
