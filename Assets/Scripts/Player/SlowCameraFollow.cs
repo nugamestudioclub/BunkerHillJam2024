@@ -29,7 +29,6 @@ public class SlowCameraFollow : MonoBehaviour
             targetPosition = cc.transform.position;
         }
 
-        Debug.Log("vel: " + cc.velocity.x);
         targetPosition = new Vector3(cc.transform.position.x, cc.transform.position.y, transform.position.z) +
             Vector3.right * cc.velocity.x * lookForward * velCurve.Evaluate(Mathf.Abs(cc.velocity.x / 25));
         transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime*speed);

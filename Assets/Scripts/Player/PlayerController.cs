@@ -117,7 +117,6 @@ public class PlayerController : MonoBehaviour
         r.direction = Vector2.down;
         if(Physics.Raycast(r,out hit, c.height / 2 + 0.1f, controller.l))
         {
-            print(hit.point + "," + hit.transform.name);
             return true;
         }
         return false;
