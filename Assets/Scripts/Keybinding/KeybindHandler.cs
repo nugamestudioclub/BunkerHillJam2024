@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -30,7 +31,15 @@ public class KeybindHandler : MonoBehaviour
         {
             if (key.IsReleased(Input.GetKey))
             {
-                actionMap[key].EndAct();
+                try
+                {
+                    actionMap[key].EndAct();
+                }
+                catch
+                {
+                    print("Failed at:" + actionMap[key]);
+                }
+                
             }
         }
     }
@@ -117,6 +126,10 @@ public class KeybindHandler : MonoBehaviour
     
     public static void AddKeybind(IAction action)
     {
+        if(action == null)
+        {
+            return;
+        }
         if (!instance.loadedActions.Contains(action))
         {
             KeyCode k = ChooseRandom();
@@ -129,6 +142,12 @@ public class KeybindHandler : MonoBehaviour
         else
         {
             instance.AppendKeybind(action);
+        }
+
+        foreach(KeySequence ks in instance.actionMap.Keys)
+        {
+            string name = instance.actionMap[ks].GetActionName();
+            UIActionDisplay.UpdateAction(name, ks.Codes);
         }
         
     }

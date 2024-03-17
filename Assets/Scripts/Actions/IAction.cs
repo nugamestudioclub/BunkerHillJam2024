@@ -14,6 +14,8 @@ public interface IAction
     /// </summary>
     void EndAct();
 
+    string GetActionName();
+
     public static IAction BuildAction(ActionType type)
     {
         IAction a;
@@ -41,8 +43,32 @@ public interface IAction
                     break;
                 }
             case ActionType.AirJump:
+                {
+                    a = player.GetComponent<AirJumpAction>();
+                    if (a == null)
+                    {
+                        a = player.AddComponent<AirJumpAction>();
+
+                    }
+                    break;
+                }
             case ActionType.DashHorizontal:
+                a = player.GetComponent<AirDashAction>();
+                if (a == null)
+                {
+                    a = player.AddComponent<AirDashAction>();
+
+                }
+                break;
             case ActionType.FireFlower:
+                {
+                    a = player.GetComponent<ShootAction>();
+                    if (a == null)
+                    {
+                        a= player.AddComponent<ShootAction>();
+                    }
+                    break;
+                }
             case ActionType.Heal:
             default:
                 a = null;

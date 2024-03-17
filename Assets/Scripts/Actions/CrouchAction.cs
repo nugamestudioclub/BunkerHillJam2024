@@ -4,33 +4,23 @@ using UnityEngine;
 
 public class CrouchAction : MonoBehaviour, IAction
 {
-    private PlayerController player;
-
-    private Vector3 originalHitboxSize;
-
-    private bool isCrouching = false;
-
     public void Act()
     {
-        if (!isCrouching)
+        if (!PlayerController.IsCrouching())
         {
-            isCrouching = true;
-            originalHitboxSize = player.transform.localScale;
-            player.transform.localScale = player.transform.localScale + Vector3.down * 0.5f;
+            PlayerController.Crouch();
         }
     }
 
     public void EndAct()
     {
-        if (isCrouching)
+        if (PlayerController.IsCrouching())
         {
-            isCrouching = false;
-            player.transform.localScale = originalHitboxSize;
+            PlayerController.Uncrouch();
         }
     }
-
-    void Start()
+    public string GetActionName()
     {
-        player = GetComponent<PlayerController>();
+        return "Crouch";
     }
 }
