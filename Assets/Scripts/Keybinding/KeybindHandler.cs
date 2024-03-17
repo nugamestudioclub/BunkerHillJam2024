@@ -31,7 +31,15 @@ public class KeybindHandler : MonoBehaviour
         {
             if (key.IsReleased(Input.GetKey))
             {
-                actionMap[key].EndAct();
+                try
+                {
+                    actionMap[key].EndAct();
+                }
+                catch
+                {
+                    print("Failed at:" + actionMap[key]);
+                }
+                
             }
         }
     }
@@ -118,6 +126,10 @@ public class KeybindHandler : MonoBehaviour
     
     public static void AddKeybind(IAction action)
     {
+        if(action == null)
+        {
+            return;
+        }
         if (!instance.loadedActions.Contains(action))
         {
             KeyCode k = ChooseRandom();

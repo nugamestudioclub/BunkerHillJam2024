@@ -44,7 +44,17 @@ public interface IAction
                 }
             case ActionType.AirJump:
             case ActionType.DashHorizontal:
+                a = null;
+                break;
             case ActionType.FireFlower:
+                {
+                    a = player.GetComponent<ShootAction>();
+                    if (a == null)
+                    {
+                        a= player.AddComponent<ShootAction>();
+                    }
+                    break;
+                }
             case ActionType.Heal:
             default:
                 a = null;
