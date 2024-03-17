@@ -22,7 +22,7 @@ public class GoalComponent : MonoBehaviour
     {
         if(other.GetComponent<PlayerController>() != null)
         {
-            SceneManager.LoadScene(nextLevel);
+            LevelLoader.Instance.ChangeScene(nextLevel);
         }
     }
 }
