@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 4033036319568334536}
   - component: {fileID: 414781182477114148}
   - component: {fileID: 5176840791588436921}
+  - component: {fileID: 6757049742274501518}
+  - component: {fileID: 2850381377473803318}
   m_Layer: 0
   m_Name: SimpleEnemy
   m_TagString: Untagged
@@ -148,3 +150,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
+--- !u!65 &6757049742274501518
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1404050900954502133}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4.9999995, y: 5.0000005, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2850381377473803318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1404050900954502133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13d0e8c0597559648be92576b7400c3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_damageAmount: 1

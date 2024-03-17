@@ -94,7 +94,7 @@ public class PlayerController : MonoBehaviour
         proj.transform.parent = null;
         
         proj.transform.position = this.transform.position + (Vector3.right * lastDir / Mathf.Abs(lastDir));
-        proj.GetComponent<Bookflower>().SetDirection(lastDir/Mathf.Abs(lastDir));
+        proj.GetComponent<Projectile>().SetDirection(lastDir/Mathf.Abs(lastDir));
     }
     public static void Shoot()
     {
