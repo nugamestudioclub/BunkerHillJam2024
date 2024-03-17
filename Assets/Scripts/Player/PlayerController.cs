@@ -1,12 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     private static PlayerController controller;
     public static PlayerController Instance { get { return controller; } }
+
     private CharacterController player;
+
+    public delegate void PrimeTrigger();
+    public event PrimeTrigger OnFire;
+    public event PrimeTrigger OnDash;
 
     [SerializeField]
     private static float GRAVITY = 0.15f;
@@ -29,10 +35,14 @@ public class PlayerController : MonoBehaviour
     private bool facingRight = true;
     private bool isCrouching = false;
 
+    private void Awake()
+    {
+        controller = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        controller = this;
         player = GetComponent<CharacterController>();
         originalHitboxSize = player.transform.localScale;
     }
@@ -120,6 +130,8 @@ public class PlayerController : MonoBehaviour
 
     private void _Shoot()
     {
+        OnFire?.Invoke();
+
         GameObject proj = Instantiate(firePrefab);
         proj.transform.parent = null;
         
@@ -148,6 +160,10 @@ public class PlayerController : MonoBehaviour
     // private
     private void _Dash()
     {
+        OnDash?.Invoke();
+
+        vel.y = 0f;
+
         if (facingRight)
         {
             vel.x = NORMAL_MOVE_SPEED;
