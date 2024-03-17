@@ -112,7 +112,10 @@ public class KeybindHandler : MonoBehaviour
     {
         foreach (KeySequence ks in actionMap.Keys)
         {
-            ks.AddRandom();
+            if (ks.Length < DifficultySettingsManager.SelectedSetting.MaxKeybinds)
+            {
+                ks.AddRandom();
+            }
         }
     }
     /// <summary>

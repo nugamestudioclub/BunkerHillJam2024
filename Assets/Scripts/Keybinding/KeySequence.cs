@@ -12,11 +12,15 @@ public class KeySequence
     {
         get { return this.codes; }
     }
+    private int length;
+    public int Length { get { return this.length; } }
+
 
     public KeySequence(KeyCode initCode)
     {
         this.codes = new List<KeyCode>() { initCode };
         timeSincePress = new List<float>() {0f};
+        length = 1;
     }
 
     public bool IsPressed(System.Func<KeyCode,bool> downLambda, System.Func<KeyCode,bool> heldLambda)
@@ -66,5 +70,6 @@ public class KeySequence
         codes.Add(rand);
         timeSincePress.Add(0);
         Debug.Log("Added keycode:" + rand);
+        this.length++;
     }
 }
