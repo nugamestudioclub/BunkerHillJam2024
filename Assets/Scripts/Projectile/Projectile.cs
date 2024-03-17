@@ -40,7 +40,8 @@ public class Projectile : MonoBehaviour
     {
         if (other.gameObject.GetComponent<GoombaComponent>() != null)
         {
-            Destroy(this.gameObject);
+            //Destroy(this.gameObject);
         }
     }
+    
 }

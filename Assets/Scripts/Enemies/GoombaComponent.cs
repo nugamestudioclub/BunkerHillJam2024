@@ -19,6 +19,7 @@ public class GoombaComponent : MonoBehaviour
     {
         if(other.gameObject.GetComponent<Projectile>() != null)
         {
+            print("HIT!");
             Collider[] colliders = this.GetComponents<Collider>();
             foreach(Collider collider in colliders)
             {

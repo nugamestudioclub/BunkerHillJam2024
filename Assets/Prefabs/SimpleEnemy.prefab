@@ -150,6 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
+  maxTurnTimeInterval: 10
 --- !u!65 &6757049742274501518
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -169,7 +170,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4.9999995, y: 5.0000005, z: 0.2}
+  m_Size: {x: 5.1, y: 5.1, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2850381377473803318
 MonoBehaviour:
