@@ -20,7 +20,12 @@ public class PlayerController : MonoBehaviour
     private GameObject firePrefab;
     private float lastDir = 1;
 
+    [SerializeField]
+    private LayerMask l;
+
     private Vector2 vel = Vector2.zero;
+
+    private bool groundedPrevFrame = false;
 
     // Start is called before the first frame update
     void Start()
@@ -39,13 +44,20 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateController()
     {
+        if (!player.isGrounded && groundedPrevFrame)
+        {
+            groundedPrevFrame = false;
+        }
+
         LateralMovement();
         vel.x = Mathf.Lerp(vel.x, 0, Time.deltaTime * FRICTION);
+
         vel.y -= GRAVITY * Time.deltaTime;
-        player.Move(vel);
 
         if (player.isGrounded)
         {
+            groundedPrevFrame = true;
+            //player.Move(new Vector3(0, -2, 0));
             vel.y = 0;
 
             // testing purposes only
@@ -54,6 +66,12 @@ public class PlayerController : MonoBehaviour
                 Jump();
             }
         }
+
+        player.Move(vel);
+
+        //PlayerController.IsGrounded();
+        //Debug.Log(controller.player.transform.position);
+        //Debug.Log(PlayerController.IsGrounded());
 
     }
 
@@ -80,12 +98,16 @@ public class PlayerController : MonoBehaviour
 
     public static bool IsGrounded()
     {
-        return controller.player.isGrounded;
+        controller.player.TryGetComponent<CharacterController>(out var c);
+        //Debug.Log(Physics.Raycast(controller.player.transform.position, Vector2.down).collider);
+        return Physics.Raycast(controller.player.transform.position, Vector2.down, c.height / 2 + 0.1f, controller.l);
     }
 
     public static void Jump()
     {
+        Debug.Log("jumping now!");
         controller.vel.y = NORMAL_JUMP_HEIGHT;
+        controller.player.Move(Vector3.up * controller.vel.y);
     }
 
     private void _Shoot()
