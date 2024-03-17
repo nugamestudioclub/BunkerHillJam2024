@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private static float GRAVITY = 0.15f;
     [SerializeField]
-    private static float NORMAL_JUMP_HEIGHT = 0.04f;
+    private static float NORMAL_JUMP_HEIGHT = .11f;
     [SerializeField]
     private static float NORMAL_MOVE_SPEED = 0.2f;
     [SerializeField]
@@ -27,6 +27,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private GameObject firePrefab;
     private float lastDir = 1;
+
+    static float timeElapsed = 0;
 
     [SerializeField]
     private LayerMask l;
@@ -154,6 +156,11 @@ public class PlayerController : MonoBehaviour
     public static void Jump()
     {
         Debug.Log("jumping now!");
+
+        if (Time.realtimeSinceStartup - timeElapsed < 0.25f) return;
+
+        timeElapsed = Time.realtimeSinceStartup;
+
         controller.vel.y = PlayerController.IsCrouching() ? NORMAL_JUMP_HEIGHT * 0.75f : NORMAL_JUMP_HEIGHT;
         controller.player.Move(Vector3.up * controller.vel.y);
         controller.StartCoroutine(controller.PlaySoundJump());
