@@ -416,6 +416,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Terrain (16x16) 1_0
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 131
+        width: 48
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe2dc0f1492834642aeb3b8087109625
+      internalID: 1304136493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -431,6 +452,7 @@ TextureImporter:
       Grass2: 424930655
       Grass3: -115603277
       Stone: -610619830
+      Terrain (16x16) 1_0: 1304136493
       Terrain (16x16) 1_10: 265468445
       Terrain (16x16) 1_12: -1652637404
       Terrain (16x16) 1_13: -12843520
