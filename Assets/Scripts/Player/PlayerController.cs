@@ -103,11 +103,31 @@ public class PlayerController : MonoBehaviour
         Ray r = new Ray();
         r.origin = controller.player.transform.position;
         r.direction = Vector2.down;
-        if(Physics.Raycast(r,out hit, c.height / 2 + 0.1f, controller.l))
+        /*if (Physics.SphereCast(controller.player.transform.position, c.height / 2 + 0.1f, Vector2.down, out hit, controller.l))
+        {
+            print(hit.point + "," + hit.transform.name);
+            return true;
+        }*/
+
+        /*if (Physics.Raycast(r,out hit, c.height / 2 + 0.1f, controller.l))
+        {
+            print(hit.point + "," + hit.transform.name);
+            return true;
+        }*/
+
+        Ray r1 = new Ray();
+        r1.origin = controller.player.transform.position + Vector3.left * c.radius * 0.9f;
+        r1.direction = Vector2.down;
+        Ray r2 = new Ray();
+        r2.origin = controller.player.transform.position + Vector3.right * c.radius * 0.9f;
+        r2.direction = Vector2.down;
+
+        if (Physics.Raycast(r1, out hit, c.height / 2 + 0.1f, controller.l) || Physics.Raycast(r2, out hit, c.height / 2 + 0.1f, controller.l))
         {
             print(hit.point + "," + hit.transform.name);
             return true;
         }
+
         return false;
     }
 
