@@ -43,6 +43,15 @@ public interface IAction
                     break;
                 }
             case ActionType.AirJump:
+                {
+                    a = player.GetComponent<AirJumpAction>();
+                    if (a == null)
+                    {
+                        a = player.AddComponent<AirJumpAction>();
+
+                    }
+                    break;
+                }
             case ActionType.DashHorizontal:
             case ActionType.FireFlower:
             case ActionType.Heal:

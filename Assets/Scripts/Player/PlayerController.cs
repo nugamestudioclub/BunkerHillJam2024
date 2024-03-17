@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 vel = Vector2.zero;
 
+    private bool groundedPrevFrame = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,13 +36,21 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateController()
     {
+        if (!player.isGrounded && groundedPrevFrame)
+        {
+            groundedPrevFrame = false;
+        }
+
         LateralMovement();
         vel.x = Mathf.Lerp(vel.x, 0, Time.deltaTime * FRICTION);
+
         vel.y -= GRAVITY * Time.deltaTime;
+
         player.Move(vel);
 
         if (player.isGrounded)
         {
+            groundedPrevFrame = true;
             vel.y = 0;
 
             // testing purposes only
@@ -66,7 +76,7 @@ public class PlayerController : MonoBehaviour
 
     public static bool IsGrounded()
     {
-        return controller.player.isGrounded;
+        return PlayerController.controller.groundedPrevFrame;
     }
 
     public static void Jump()
