@@ -17,6 +17,7 @@ public class UIActionComponent : MonoBehaviour
 
     private List<KeyCode> keys;
     private List<GameObject> uiKeys;
+    
     // Start is called before the first frame update
     void Start()
     {
