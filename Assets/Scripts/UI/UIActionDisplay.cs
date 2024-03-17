@@ -31,7 +31,8 @@ public class UIActionDisplay : MonoBehaviour
         {
             obj = Instantiate(actionUIPrefab,this.transform);
             obj.GetComponent<UIActionComponent>().ActionName= actionName;
-            obj.transform.position += Vector3.down * actionObjects.Count * 300f;
+            obj.GetComponent<RectTransform>().anchoredPosition += Vector2.down * actionObjects.Count * 50f;
+            //obj.transform.position += Vector3.down * actionObjects.Count * 300f;
             actionObjects.Add(actionName, obj);
         }
         obj.GetComponent<UIActionComponent>().ModifyKeyCodes(codes);

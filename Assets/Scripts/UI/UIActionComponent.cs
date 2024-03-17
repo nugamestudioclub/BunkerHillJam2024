@@ -47,7 +47,7 @@ public class UIActionComponent : MonoBehaviour
 
     private string CleanName(string raw)
     {
-        return raw.Replace("Alpha ", "");
+        return raw.Replace("Alpha", "");
     }
 
     public void ModifyKeyCodes(List<KeyCode> keys)
@@ -62,7 +62,7 @@ public class UIActionComponent : MonoBehaviour
             if (uiKeys.Count <= i)
             {
                 GameObject newButton = Instantiate(actionKeyPrefab,transform);
-                newButton.transform.position += Vector3.right * 150f*uiKeys.Count;
+                newButton.GetComponent<RectTransform>().anchoredPosition += Vector2.right * uiKeys.Count * 35f;
                 newButton.GetComponentInChildren<TMP_Text>().text = CleanName(keys[i].ToString());
                 uiKeys.Add(newButton);
             }
