@@ -17,6 +17,17 @@ public class LevelLoader : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
     }
+    private void OnDestroy()
+    {
+        Instance = null;
+    }
+    private void Update()
+    {
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+    }
 
     public void ChangeScene(string scene_name)
     {
