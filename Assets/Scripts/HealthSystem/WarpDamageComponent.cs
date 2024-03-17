@@ -12,8 +12,6 @@ public class WarpDamageComponent : DamageComponent
         base.DealDamageTo(component);
 
         // make this prettier with animations and stuff
-        print(transform.position);
         component.gameObject.transform.SetPositionAndRotation(m_warpAnchor.position, Quaternion.identity);
-        print(transform.position);
     }
 }
