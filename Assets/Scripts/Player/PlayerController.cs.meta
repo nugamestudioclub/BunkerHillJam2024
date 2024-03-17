@@ -3,7 +3,9 @@ guid: e062cc7236c81b34d9066c82d47780c6
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - firePrefab: {instanceID: 0}
+  - jumpSound: {fileID: 8300000, guid: b06612e588b4464478d800a6d008d865, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

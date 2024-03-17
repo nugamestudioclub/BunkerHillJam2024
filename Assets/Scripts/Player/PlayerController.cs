@@ -33,9 +33,17 @@ public class PlayerController : MonoBehaviour
 
     Vector3 originalHitboxSize;
 
+    private static AudioSource a;
+
     private Vector2 vel = Vector2.zero;
     private bool facingRight = true;
     private bool isCrouching = false;
+
+    public AudioClip jumpSound;
+    public AudioClip hurtSound;
+    public AudioClip dashSound;
+    public AudioClip bookGetSound;
+    public AudioClip shootSound;
 
     private void Awake()
     {
@@ -47,6 +55,7 @@ public class PlayerController : MonoBehaviour
     {
         player = GetComponent<CharacterController>();
         originalHitboxSize = player.transform.localScale;
+        a = player.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -148,6 +157,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log("jumping now!");
         controller.vel.y = PlayerController.IsCrouching() ? NORMAL_JUMP_HEIGHT * 0.75f : NORMAL_JUMP_HEIGHT;
         controller.player.Move(Vector3.up * controller.vel.y);
+        controller.StartCoroutine(controller.PlaySoundJump());
     }
 
     private void _Shoot()
@@ -212,17 +222,22 @@ public class PlayerController : MonoBehaviour
 
     public static void Dash()
     {
+        controller.StartCoroutine(controller.PlaySoundDash());
         controller._Dash();
     }
 
     public static void Shoot()
     {
+        controller.StartCoroutine(controller.PlaySoundShoot());
         controller._Shoot();
     }
 
     public void OnDamageSustained(int amount, int _)
     {
+        
         if (amount >= 0) return;
+
+        controller.StartCoroutine(controller.PlaySoundHurt());
 
         var colliders = Physics.OverlapSphere(transform.position, 1f);
 
@@ -235,5 +250,41 @@ public class PlayerController : MonoBehaviour
                 vel = direction * KNOCKBACK_SCALAR;
             }
         }
+    }
+
+    private IEnumerator PlaySoundJump()
+    {
+        yield return PlaySound(controller.jumpSound);
+    }
+
+    private IEnumerator PlaySoundHurt()
+    {
+        yield return PlaySound(controller.hurtSound);
+    }
+
+    private IEnumerator PlaySoundDash()
+    {
+        yield return PlaySound(controller.dashSound);
+    }
+
+    private IEnumerator PlaySoundBookGet()
+    {
+        yield return PlaySound(controller.bookGetSound);
+    }
+
+    private IEnumerator PlaySoundShoot()
+    {
+        yield return PlaySound(controller.shootSound);
+    }
+
+    private IEnumerator PlaySound(AudioClip c)
+    {
+        /*GameObject audioLocation = new GameObject("AudioObject");
+        audioLocation.transform.position = Camera.main.transform.position;
+        AudioSource audioSource = audioLocation.AddComponent<AudioSource>();*/
+
+        a.clip = c;
+        a.Play();
+        yield return null;
     }
 }
