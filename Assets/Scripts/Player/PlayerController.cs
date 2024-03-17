@@ -79,10 +79,10 @@ public class PlayerController : MonoBehaviour
             vel.y = 0;
 
             // testing purposes only
-            if (Input.GetKey(KeyCode.UpArrow))
+            /*if (Input.GetKey(KeyCode.UpArrow))
             {
-                Jump();
-            }
+                //Jump();
+            }*/
         }
 
         player.Move(vel);
