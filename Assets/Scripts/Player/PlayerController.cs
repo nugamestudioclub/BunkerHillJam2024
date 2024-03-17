@@ -145,7 +145,6 @@ public class PlayerController : MonoBehaviour
 
         if (Physics.Raycast(r1, out hit, c.height / 2 + 0.1f, controller.l) || Physics.Raycast(r2, out hit, c.height / 2 + 0.1f, controller.l))
         {
-            print(hit.point + "," + hit.transform.name);
             return true;
         }
 
