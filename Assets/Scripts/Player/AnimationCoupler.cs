@@ -11,6 +11,7 @@ public class AnimationCoupler : MonoBehaviour
     private int m_crouchingHash;
     private int m_fireHash;
     private int m_dashHash;
+    private int m_damageHash;
 
     private bool m_wasGrounded;
     private bool m_wasCrouching;
@@ -29,6 +30,7 @@ public class AnimationCoupler : MonoBehaviour
         m_crouchingHash = Animator.StringToHash("crouching");
         m_fireHash = Animator.StringToHash("fire");
         m_dashHash = Animator.StringToHash("dash");
+        m_damageHash = Animator.StringToHash("damage");
     }
 
     private void Start()
@@ -66,6 +68,13 @@ public class AnimationCoupler : MonoBehaviour
             m_wasGrounded = is_grounded;
             m_animator.SetBool(m_groundedHash, is_grounded);
         }
+    }
+
+    public void ConditionalPrimeDamageTrigger(int amount, int _)
+    {
+        if (amount >= 0) return;
+
+        m_animator.SetTrigger(m_damageHash);
     }
 
     public void PrimeDashTrigger() => m_animator.SetTrigger(m_dashHash);

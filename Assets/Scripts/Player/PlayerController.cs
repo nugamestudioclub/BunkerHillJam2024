@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private static float FRICTION = 10f;
     [SerializeField]
+    private float KNOCKBACK_SCALAR = 0.05f;
+    [SerializeField]
     private GameObject firePrefab;
     private float lastDir = 1;
 
@@ -196,5 +198,22 @@ public class PlayerController : MonoBehaviour
     public static void Shoot()
     {
         controller._Shoot();
+    }
+
+    public void OnDamageSustained(int amount, int _)
+    {
+        if (amount >= 0) return;
+
+        var colliders = Physics.OverlapSphere(transform.position, 1f);
+
+        foreach (Collider c in colliders)
+        {
+            if (c.CompareTag("DamageSource"))
+            {
+                Vector2 direction = transform.position.x < c.transform.position.x ? Vector2.left : Vector2.right;
+
+                vel = direction * KNOCKBACK_SCALAR;
+            }
+        }
     }
 }

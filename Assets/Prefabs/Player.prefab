@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 262560930569259496}
   - component: {fileID: 5287372779978579704}
   - component: {fileID: 8147587526506351933}
+  - component: {fileID: 6589988364947943268}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -123,6 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e062cc7236c81b34d9066c82d47780c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  KNOCKBACK_SCALAR: 0.1
   firePrefab: {fileID: 0}
   l:
     serializedVersion: 2
@@ -140,6 +142,49 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapping: {fileID: 11400000, guid: e1abf06d781b60644a0cc51005c021e4, type: 2}
+--- !u!114 &6589988364947943268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7850631308748005175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c850850c9f5f38e4591efa5cf1091eda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_maxHP: 3
+  OnHealthChanged:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5195818028101819271}
+        m_TargetAssemblyTypeName: AnimationCoupler, Assembly-CSharp
+        m_MethodName: ConditionalPrimeDamageTrigger
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5287372779978579704}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnDamageSustained
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8841492353296283972
 GameObject:
   m_ObjectHideFlags: 0
