@@ -12,7 +12,7 @@ public class JumpAction : MonoBehaviour, IAction
     }
     public void Act()
     {
-        Debug.Log(PlayerController.IsGrounded());
+        //Debug.Log(PlayerController.IsGrounded());
 
         if (PlayerController.IsGrounded())
         {

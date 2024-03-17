@@ -17,6 +17,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private static float FRICTION = 10f;
 
+    [SerializeField]
+    private LayerMask l;
+
     private Vector2 vel = Vector2.zero;
 
     private bool groundedPrevFrame = false;
@@ -46,11 +49,10 @@ public class PlayerController : MonoBehaviour
 
         vel.y -= GRAVITY * Time.deltaTime;
 
-        player.Move(vel);
-
         if (player.isGrounded)
         {
             groundedPrevFrame = true;
+            //player.Move(new Vector3(0, -2, 0));
             vel.y = 0;
 
             // testing purposes only
@@ -59,6 +61,12 @@ public class PlayerController : MonoBehaviour
                 Jump();
             }
         }
+
+        player.Move(vel);
+
+        //PlayerController.IsGrounded();
+        //Debug.Log(controller.player.transform.position);
+        //Debug.Log(PlayerController.IsGrounded());
 
     }
 
@@ -76,11 +84,15 @@ public class PlayerController : MonoBehaviour
 
     public static bool IsGrounded()
     {
-        return PlayerController.controller.groundedPrevFrame;
+        controller.player.TryGetComponent<CharacterController>(out var c);
+        //Debug.Log(Physics.Raycast(controller.player.transform.position, Vector2.down).collider);
+        return Physics.Raycast(controller.player.transform.position, Vector2.down, c.height / 2 + 0.1f, controller.l);
     }
 
     public static void Jump()
     {
+        Debug.Log("jumping now!");
         controller.vel.y = NORMAL_JUMP_HEIGHT;
+        controller.player.Move(Vector3.up * controller.vel.y);
     }
 }
