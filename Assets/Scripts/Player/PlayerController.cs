@@ -1,12 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     private static PlayerController controller;
     public static PlayerController Instance { get { return controller; } }
+
     private CharacterController player;
+
+    public delegate void PrimeTrigger();
+    public event PrimeTrigger OnFire;
+    public event PrimeTrigger OnDash;
 
     [SerializeField]
     private static float GRAVITY = 0.15f;
@@ -16,6 +22,8 @@ public class PlayerController : MonoBehaviour
     private static float NORMAL_MOVE_SPEED = 0.2f;
     [SerializeField]
     private static float FRICTION = 10f;
+    [SerializeField]
+    private float KNOCKBACK_SCALAR = 0.05f;
     [SerializeField]
     private GameObject firePrefab;
     private float lastDir = 1;
@@ -29,10 +37,14 @@ public class PlayerController : MonoBehaviour
     private bool facingRight = true;
     private bool isCrouching = false;
 
+    private void Awake()
+    {
+        controller = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        controller = this;
         player = GetComponent<CharacterController>();
         originalHitboxSize = player.transform.localScale;
     }
@@ -120,6 +132,8 @@ public class PlayerController : MonoBehaviour
 
     private void _Shoot()
     {
+        OnFire?.Invoke();
+
         GameObject proj = Instantiate(firePrefab);
         proj.transform.parent = null;
         
@@ -148,6 +162,10 @@ public class PlayerController : MonoBehaviour
     // private
     private void _Dash()
     {
+        OnDash?.Invoke();
+
+        vel.y = 0f;
+
         if (facingRight)
         {
             vel.x = NORMAL_MOVE_SPEED;
@@ -180,5 +198,22 @@ public class PlayerController : MonoBehaviour
     public static void Shoot()
     {
         controller._Shoot();
+    }
+
+    public void OnDamageSustained(int amount, int _)
+    {
+        if (amount >= 0) return;
+
+        var colliders = Physics.OverlapSphere(transform.position, 1f);
+
+        foreach (Collider c in colliders)
+        {
+            if (c.CompareTag("DamageSource"))
+            {
+                Vector2 direction = transform.position.x < c.transform.position.x ? Vector2.left : Vector2.right;
+
+                vel = direction * KNOCKBACK_SCALAR;
+            }
+        }
     }
 }
