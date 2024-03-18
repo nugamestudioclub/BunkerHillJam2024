@@ -14,13 +14,13 @@ public class PlayerController : MonoBehaviour
     public event PrimeTrigger OnDash;
 
     [SerializeField]
-    private static float GRAVITY = 0.15f;
+    private static float GRAVITY = 40f;
 
-    private static float NORMAL_JUMP_HEIGHT = .04f;
+    private static float NORMAL_JUMP_HEIGHT = 12f;
     [SerializeField]
-    private static float NORMAL_MOVE_SPEED = 0.2f;
+    private static float NORMAL_MOVE_SPEED = 0.1f;
     [SerializeField]
-    private static float FRICTION = 10f;
+    private static float FRICTION = 0.02f;
     [SerializeField]
     private float KNOCKBACK_SCALAR = 0.05f;
     [SerializeField]
@@ -70,16 +70,16 @@ public class PlayerController : MonoBehaviour
     private void UpdateController()
     {
         LateralMovement();
-        vel.x = Mathf.Lerp(vel.x, 0, Time.deltaTime * FRICTION);
+        vel.x = Mathf.Lerp(vel.x, 0, FRICTION);
 
         //vel.y -= GRAVITY * Time.deltaTime;
 
         if (!player.isGrounded)
         {
-            vel.y -= GRAVITY * Time.deltaTime;
+            vel.y -= GRAVITY*Time.deltaTime;
         }
 
-        player.Move(vel);
+        player.Move(vel*Time.deltaTime);
 
         //PlayerController.IsGrounded();
         //Debug.Log(controller.player.transform.position);
@@ -100,12 +100,12 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            vel.x += NORMAL_MOVE_SPEED * Time.deltaTime;
+            vel.x += NORMAL_MOVE_SPEED;
             facingRight = true;
         }
         else if (Input.GetKey(KeyCode.LeftArrow))
         {
-            vel.x -= NORMAL_MOVE_SPEED * Time.deltaTime;
+            vel.x -= NORMAL_MOVE_SPEED;
             facingRight = false;
         }
     }

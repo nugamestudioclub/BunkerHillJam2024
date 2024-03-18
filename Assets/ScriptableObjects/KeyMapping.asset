@@ -87,3 +87,7 @@ MonoBehaviour:
     position: {x: 9, y: -1}
   - KeyCode: 32
     position: {x: 5, y: 3}
+  - KeyCode: 273
+    position: {x: 11, y: 3}
+  - KeyCode: 274
+    position: {x: 11, y: 4}
