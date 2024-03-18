@@ -16,8 +16,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private static float GRAVITY = 0.15f;
-    [SerializeField]
-    private static float NORMAL_JUMP_HEIGHT = .11f;
+
+    private static float NORMAL_JUMP_HEIGHT = .04f;
     [SerializeField]
     private static float NORMAL_MOVE_SPEED = 0.2f;
     [SerializeField]
@@ -73,18 +73,11 @@ public class PlayerController : MonoBehaviour
         LateralMovement();
         vel.x = Mathf.Lerp(vel.x, 0, Time.deltaTime * FRICTION);
 
-        vel.y -= GRAVITY * Time.deltaTime;
+        //vel.y -= GRAVITY * Time.deltaTime;
 
-        if (player.isGrounded)
+        if (!player.isGrounded)
         {
-            //player.Move(new Vector3(0, -2, 0));
-            vel.y = 0;
-
-            // testing purposes only
-            /*if (Input.GetKey(KeyCode.UpArrow))
-            {
-                //Jump();
-            }*/
+            vel.y -= GRAVITY * Time.deltaTime;
         }
 
         player.Move(vel);
@@ -157,12 +150,15 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("jumping now!");
 
-        if (Time.realtimeSinceStartup - timeElapsed < 0.25f) return;
+        if (Time.realtimeSinceStartup - timeElapsed < 0.05f) {
+            Debug.Log("exiting early");
+            return;
+        }
 
         timeElapsed = Time.realtimeSinceStartup;
 
         controller.vel.y = PlayerController.IsCrouching() ? NORMAL_JUMP_HEIGHT * 0.75f : NORMAL_JUMP_HEIGHT;
-        controller.player.Move(Vector3.up * controller.vel.y);
+        //controller.player.Move(Vector3.up * controller.vel.y);
         controller.StartCoroutine(controller.PlaySoundJump());
     }
 
@@ -204,11 +200,11 @@ public class PlayerController : MonoBehaviour
 
         if (facingRight)
         {
-            vel.x = NORMAL_MOVE_SPEED;
+            vel.x = NORMAL_MOVE_SPEED * 0.9f;
         }
         else
         {
-            vel.x = -NORMAL_MOVE_SPEED;
+            vel.x = -NORMAL_MOVE_SPEED * 0.9f;
         }
     }
     public static void Crouch()

@@ -13,14 +13,15 @@ public class ToggleDifficulty : MonoBehaviour
     [SerializeField]
     private TMP_Text text;
 
-    bool isEasy = false;
+    bool isEasy = true;
 
     void Start()
     {
         DifficultySettingsManager.SelectedSetting = easy;
         isEasy = !isEasy;
 
-        text.text = "Toggle to " + (isEasy ? "hard" : "easy") + " mode";
+        text.text = "Toggle to " + (isEasy ? "easy" : "hard") + " mode";
+        Debug.Log(DifficultySettingsManager.SelectedSetting.name);
     }
 
     public void Toggle()
@@ -28,6 +29,7 @@ public class ToggleDifficulty : MonoBehaviour
         DifficultySettingsManager.SelectedSetting = isEasy ? easy : hard;
         isEasy = !isEasy;
 
-        text.text = "Toggle to " +( isEasy ? "hard" : "easy") + " mode";
+        text.text = "Toggle to " +( isEasy ? "easy" : "hard") + " mode";
+        Debug.Log(DifficultySettingsManager.SelectedSetting.name);
     }
 }
